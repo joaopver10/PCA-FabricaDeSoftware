@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <title> {% block title %}{% endblock title %} </title>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<aside>
+  <a>
+  <svg version="1.1" id="nav-btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+    <path id="list-view-icon" d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
+   V285.429z M462,403.143H50V462h412V403.143z"></path>
+  </svg>
+</a>
+  <h1>Educa+</h1>
+
+  <nav>
+    <ul>
+        <li><img src="{% static 'images/botao-home.png' %}" alt=""><a href="#">Início</a></li>
+        <li><img src="{% static 'images/conquistas.png' %}" alt=""><a href="#">Conquistas</a></li>
+        <li><img src="{% static 'images/perfil.png' %}" alt=""><a href="#">Perfil</a></li>
+        <li><img src="{% static 'images/ajuda.png' %}" alt=""><a href="#">Ajuda</a></li>
+        <li><img src="{% static 'images/sair.png' %}" alt=""><a href="#">Sair</a></li>
+    </ul>
+  </nav>
+
+
+</aside>
+
+<header>
+
+</header>
+
+
+{% block content %}
+
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="{% static 'js/sidebar.js' %}"></script>
+</body>
+</html>

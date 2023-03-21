@@ -2,48 +2,49 @@ from django.db import models
 from django.db.models import signals
 from django.template.defaultfilters import slugify
 
-dificuldade = (
-    ('f','Facil'),
-    ('m','Medio'),
-    ('d','Dificil'),
+difculdade = (
+    ('Fácil', 'Fácil'),
+    ('Médio', 'Médio'),
+    ('Difícil', 'Difícil')
 )
 
-class Justificativas(models.Model):
-    justificativa = models.TextField('Justificativa')
+class Quiz(models.Model):
+    nome = models.CharField(max_length=120)
+    topico =models.CharField(max_length=120)
+    num_de_questoes = models.IntegerField()
+    tempo = models.IntegerField(help_text="Duração do quiz em minutos")
+    pts_necessarios = models.IntegerField(help_text="Pontuação necessária em %")
+    dificuldade = models.CharField(max_length=8, choices=difculdade)
 
     def __str__(self):
-       return self.justificativa
+        return f"{self.nome}-{self.topico}"
 
-class RespostasCorreta(models.Model):
-    resposta = models.CharField('Resposta', max_length=250)
-
-    def __str__(self):
-       return self.resposta
-
-class RespostasIncorretas(models.Model):
-    respostaa = models.CharField('Resposta 1', max_length=250)
-    respostab = models.CharField('Resposta 2', max_length=250)
-    respostac = models.CharField('Resposta 3', max_length=250)
-
-    def __str__(self):
-        return f'{self.respostaa} ' \
-              f'{self.respostab}' \
-              f'{self.respostac}'
-
-
+    def get_questions(self):
+        return self.questoes_set.all()
 
 class Questoes(models.Model):
-    pergunta = models.TextField('Pergunta')
-    materia = models.CharField('Materia', max_length=100)
-    dificuldade = models.CharField('Dificuldade', max_length=10,choices=dificuldade)
-    respostacorreta = models.ForeignKey(RespostasCorreta, on_delete=models.CASCADE)
-    respostaincorreta = models.ForeignKey(RespostasIncorretas, on_delete=models.CASCADE)
-    justifica = models.ForeignKey(Justificativas, on_delete=models.CASCADE)
+    pergunta = models.TextField()
+    quiz = models.ForeignKey(Quiz, on_delete = models.CASCADE)
+    criado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-       return f'{self.pergunta} ' \
-              f'{self.materia} ' \
-              f'{self.dificuldade}' \
+        return {self.pergunta}
 
+    def get_answers(self):
+        return self.answer_set.all()
 
+class Answer(models.Model):
+    texto = models.TextField()
+    correto = models.BooleanField(default=False)
+    questao = models.ForeignKey(Questoes, on_delete = models.CASCADE)
+    criado = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"Questão: {self.questao.pergunta}, Resposta: {self.texto}, Correto: {self.correto}"
+
+'''
+class Resultado(models.Model):
+    quiz = models.ForeignKey()
+    usuario = models.ForeignKey()
+    pontos = models.FloatField()
+'''
