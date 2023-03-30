@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c2795b-5946-4267-90f1-6226814c29c0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/static/js/aluno.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/portal.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/static/css/quiz.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/static/js/quiz.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/quiz.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/static/css/aluno.css" beforeDir="false" afterPath="$PROJECT_DIR$/core/static/css/aluno.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/static/css/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/core/static/css/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/static/js/sidebar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/templates/aluno.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/templates/cadastro.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/professor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/templates/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/sidebar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +104,12 @@
       <workItem from="1678747987029" duration="1845000" />
       <workItem from="1678818860156" duration="3573000" />
       <workItem from="1678900402356" duration="7354000" />
-      <workItem from="1678987763201" duration="27314000" />
+      <workItem from="1678987763201" duration="64090000" />
+      <workItem from="1679936792586" duration="598000" />
+      <workItem from="1679953440479" duration="5408000" />
+      <workItem from="1680029597054" duration="592000" />
+      <workItem from="1680127108036" duration="351000" />
+      <workItem from="1680137084414" duration="2376000" />
     </task>
     <servers />
   </component>
