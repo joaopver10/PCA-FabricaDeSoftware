@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.db.models import signals
 from django.template.defaultfilters import slugify
 
@@ -7,6 +8,14 @@ difculdade = (
     ('Médio', 'Médio'),
     ('Difícil', 'Difícil')
 )
+
+
+class Professor(models.Model):
+
+
+
+class Aluno(models.Model):
+
 
 class Quiz(models.Model):
     nome = models.CharField(max_length=120)

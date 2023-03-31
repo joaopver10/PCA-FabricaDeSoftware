@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import professor, aluno, matematica, ciencias, geografia, historia, portugues, ingles, portal
+from .views import professor, aluno, matematica, ciencias, geografia, historia, portugues, ingles, portal, sair
 
 urlpatterns=[
     path('', portal, name='portal'),
@@ -11,7 +11,7 @@ urlpatterns=[
     path('geografia/', geografia, name='geografia'),
     path('historia/', historia, name='historia'),
     path('portugues/', portugues, name='portugues'),
-    path('ingles/', ingles, name='ingles')
-
+    path('ingles/', ingles, name='ingles'),
+    path('deslogar', sair, name='sair')
 
 ]
