@@ -1,0 +1,186 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/painel.css' %}">
+
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 bg-side">
+                    <!-- <div class='header'>
+                        <img src="{% static 'usuarios/img/logo_adote.png' %}" width="9%"><span class="font-logo">ADO.TE</span>
+                    </div> -->
+
+                    <div class="body-form">
+                        {% if messages %}
+                            <br>
+                            {% for message in messages %}
+                                <div class="alert {{message.tags}}">
+                                    {{message}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <p>Dados pessoais</p>
+                        <hr>
+                        <form action="{% url 'painel' %}" method="POST">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md">
+                                    <span>Nome:</span>
+                                    <input type="text" class="form-control" placeholder="Nome completo" name="nome">
+                                </div>
+                                <div class="col-3">
+                                    <span>Sexo</span>
+                                    <input type="text" class="form-control" name="sexo">
+                                </div>
+                            </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md">
+                                    <span>Data nascimento:</span>
+                                    <input type="date" class="form-control date" placeholder="DD/MM/YYYY" name="dataNasc">
+                                    </div>
+                                    <div class="col-md">
+                                        <span>Local nascimento:</span>
+                                        <input type="text" class="form-control" name="localNasc">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md">
+                                    <span>Nome do pai:</span>
+                                    <input type="text" class="form-control" name="nomePai">
+                                </div>
+                                <div class="col-md">
+                                    <span>Nome da mãe:</span>
+                                    <input type="text" class="form-control" name="nomeMae">
+                                </div>
+                                <div class="col-md">
+                                    <span>Telefone:</span>
+                                    <input type="text" class="form-control tel" placeholder="Com DDD" name="tel">
+                                </div>
+                            </div>
+                            <br>
+                            <p>Endereço</p>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>CEP:</span>
+                                    <input id="cep" type="text" class="form-control cep" name="cep">
+                                </div>
+                                <div class="col-md">
+                                    <span>Logradouro:</span>
+                                    <input id="logradouro" type="text" class="form-control" name="logr">
+                                </div>
+                                <div class="col-3">
+                                    <span>Número:</span>
+                                    <input id="numero" type="text" class="form-control" name="numero">
+                                </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <span>Bairro:</span>
+                                        <input id="bairro" type="text" class="form-control" name="bairro">
+                                    </div>
+                                    <div class="col-md">
+                                        <span>Cidade:</span>
+                                        <input id="cidade" type="text" class="form-control" name="cidade">
+                                    </div>
+                                    <div class="col-5">
+                                        <span>Complemento:</span>
+                                        <input  id="complemento" type="text" class="form-control" name="complemento">
+                                    </div>
+
+                                </div>
+                                <br>
+                                <p>Dados do aluno</p>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <span>Turma:</span>
+                                        <input type="text" class="form-control"  name="turma">
+                                        <br>
+                                    </div>
+                                    <div class="col-md">
+                                        <span>Turno:</span>
+                                        <input type="text" class="form-control"  name="turno">
+                                        <br>
+                                    </div>
+                                    <div class="col-md">
+                                        <span>Ano:</span>
+                                        <input type="number" class="form-control"  name="ano">
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <span>E-mail:</span>
+                                        <input type="email" class="form-control"  name="email">
+                                        <br>
+                                    </div>
+                                    <div class="col-md">
+                                        <span>Senha:</span>
+                                        <input type="password" class="form-control"  name="senha">
+                                    </div>
+                                </div>
+
+                            <input type="submit" value="SALVAR" class="btn-custom-primary">
+
+                            <input type="reset" value="LIMPAR CAMPOS" class="link-float">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+    <script>
+        $('.cep').mask('00000-000');
+        var MaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+        Options = {
+            onKeyPress: function(val, e, field, options) {
+               field.mask(MaskBehavior.apply({}, arguments), options);
+            }
+        }
+		$("#cep").focusout(function(){
+			//Início do Comando AJAX
+			$.ajax({
+				//O campo URL diz o caminho de onde virá os dados
+				//É importante concatenar o valor digitado no CEP
+				url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/',
+				//Aqui você deve preencher o tipo de dados que será lido,
+				//no caso, estamos lendo JSON.
+				dataType: 'json',
+				//SUCESS é referente a função que será executada caso
+				//ele consiga ler a fonte de dados com sucesso.
+				//O parâmetro dentro da função se refere ao nome da variável
+				//que você vai dar para ler esse objeto.
+				success: function(resposta){
+					//Agora basta definir os valores que você deseja preencher
+					//automaticamente nos campos acima.
+					$("#logradouro").val(resposta.logradouro);
+					$("#complemento").val(resposta.complemento);
+					$("#bairro").val(resposta.bairro);
+					$("#cidade").val(resposta.localidade);
+					$("#uf").val(resposta.uf);
+					//Vamos incluir para que o Número seja focado automaticamente
+					//melhorando a experiência do usuário
+					$("#numero").focus();
+				}
+			});
+		});
+    </script>
+    {% block scripts %}{% endblock %}
+    </body>
+</html>
