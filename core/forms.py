@@ -1,11 +1,33 @@
-from django import forms
-from django.contrib.auth import forms
-from .models import Users
+from django import forms as fm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUsuario, Aluno
 
-class UserChangeForm(forms.UserChangeForm):
-    class Meta(forms.UserChangeForm.Meta):
-        model = Users
 
-class UserCreationForm(forms.UserCreationForm):
-    class Meta(forms.UserCreationForm.Meta):
-        model = Users
+class CustomUsuarioForm(UserCreationForm):
+
+    class Meta:
+        model = CustomUsuario
+        fields = ['first_name', 'last_name', 'matricula']
+        labels = {'username': 'Username/E-mail'}
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        user.email = self.cleaned_data["username"]
+        if commit:
+            user.save()
+        return user
+
+
+class CustomUsuarioChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUsuario
+        fields = ['first_name', 'last_name', 'matricula']
+
+
+class CadastroModelAluno(fm.ModelForm):
+
+    class Meta:
+        model = Aluno
+        fields = ['matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeMae', 'nomePai', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade','complemento', 'turma', 'turno', 'ano', 'usuario']

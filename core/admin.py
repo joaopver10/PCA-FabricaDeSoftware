@@ -1,39 +1,27 @@
 from django.contrib import admin
-from django.contrib.auth import admin as admin_auth_django
-from .forms import UserChangeForm, UserCreationForm
-from .models import Professor, Aluno, Users
+from django.contrib.auth.admin import UserAdmin
+from .forms import CustomUsuarioChangeForm, CadastroModelAluno, CustomUsuarioForm
+from .models import Professor, CustomUsuario, Aluno
 
-"""@admin.register(Professor)
+@admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
-    list_display = ('id','professor')
-"""
+    list_display = ('id','email', 'usuario_id')
 
-"""
-@admin.register(Aluno)
+
+@admin.register(CustomUsuario)
+class CustomUsuarioAdmin(UserAdmin):
+    add_form = CustomUsuarioForm
+    form = CustomUsuarioChangeForm
+    model = CustomUsuario
+    list_display =('first_name', 'last_name', 'email', 'matricula')
+    fieldsets = (
+            (None, {'fields': ('email', 'password')}),
+            ('Informações pessoais', {'fields': ('first_name', 'last_name', 'matricula')}),
+            ('Datas Importantes', {'fields': ('last_login', 'date_joined')}),
+        )
+
+
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'dt_nascimento')
-"""
+    list_display = ('matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeMae', 'nomePai', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade', 'complemento', 'turma', 'turno', 'ano', 'usuario')
 
-
-@admin.register(Users)
-class UsersAdmin(admin_auth_django.UserAdmin):
-    form = UserChangeForm
-    add_form = UserCreationForm
-    model = Users
-    fieldsets = admin_auth_django.UserAdmin.fieldsets + (
-        ('Sexo', {'fields': ('sexo',)}),
-        ('Data Nascimento', {'fields': ('dataNasc',)}),
-        ('localNasc', {'fields': ('localNasc',)}),
-        ('nomePai', {'fields': ('nomePai',)}),
-        ('nomeMae', {'fields': ('nomeMae',)}),
-        ('tel', {'fields': ('tel',)}),
-        ('cep', {'fields': ('cep',)}),
-        ('logr', {'fields': ('logr',)}),
-        ('numero', {'fields': ('numero',)}),
-        ('bairro', {'fields': ('bairro',)}),
-        ('cidade', {'fields': ('cidade',)}),
-        ('complemento', {'fields': ('complemento',)}),
-        ('turma', {'fields': ('turma',)}),
-        ('turno', {'fields': ('turno',)}),
-        ('ano', {'fields': ('ano',)}),
-    )
+admin.site.register(Aluno, AlunoAdmin)

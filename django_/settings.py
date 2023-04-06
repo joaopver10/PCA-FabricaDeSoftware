@@ -148,4 +148,4 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
 }
 
-AUTH_USER_MODEL = 'core.Users'
+AUTH_USER_MODEL = 'core.CustomUsuario'
