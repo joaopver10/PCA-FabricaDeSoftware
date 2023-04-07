@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import CustomUsuarioChangeForm, CadastroModelAluno, CustomUsuarioForm
+from .forms import CustomUsuarioChangeForm, CustomUsuarioForm
 from .models import Professor, CustomUsuario, Aluno
 
 @admin.register(Professor)
@@ -22,6 +22,6 @@ class CustomUsuarioAdmin(UserAdmin):
 
 
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeMae', 'nomePai', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade', 'complemento', 'turma', 'turno', 'ano', 'usuario')
+    list_display = ('matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeMae', 'nomePai', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade', 'complemento', 'turma', 'turno', 'ano', 'professor')
 
 admin.site.register(Aluno, AlunoAdmin)

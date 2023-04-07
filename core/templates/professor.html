@@ -16,7 +16,7 @@
     <form action="{% url 'professor' %}" method="POST" class="form login" autocomplete="off" enctype="multipart/form-data">
         {%for message in messages %}
             <p class="alert">
-              {%if "cad" in message.tags %}
+              {%if "login" in message.tags %}
                 {{message}}
               {%endif%}
             </p>

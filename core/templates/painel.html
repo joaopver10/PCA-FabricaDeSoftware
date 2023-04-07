@@ -19,6 +19,7 @@
                     </div> -->
 
                     <div class="body-form">
+
                         {% if messages %}
                             <br>
                             {% for message in messages %}
@@ -29,7 +30,8 @@
                         {% endif %}
                         <p>Dados pessoais</p>
                         <hr>
-                        <form action="{% url 'painel' %}" method="POST">{% csrf_token %}
+                        <form action="{% url 'painel' %}" method="POST">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md">
                                     <span>Nome:</span>
@@ -122,17 +124,7 @@
                                         <br>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md">
-                                        <span>E-mail:</span>
-                                        <input type="email" class="form-control"  name="email">
-                                        <br>
-                                    </div>
-                                    <div class="col-md">
-                                        <span>Senha:</span>
-                                        <input type="password" class="form-control"  name="senha">
-                                    </div>
-                                </div>
+
 
                             <input type="submit" value="SALVAR" class="btn-custom-primary">
 
@@ -184,6 +176,10 @@
 				}
 			});
 		});
+        $('.tel').mask(MaskBehavior, Options);
+         function limparform() {
+             document.getElementsByClassName('form-control').value = '';
+         }
     </script>
     {% block scripts %}{% endblock %}
     </body>

@@ -52,26 +52,25 @@ class CustomUsuario(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
-        return f"{self.email}, {self.matricula}"
+        return f"{self.email} {self.matricula}"
 
     objects = UserManager() ## This is the new line in the User model. ##
+
+class Professor(models.Model):
+    email = models.EmailField("E-mail", unique=True)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Usuário", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.email
+
 
 
 class Aluno(models.Model):
 
-    choices_sexo = (
-        ('M', 'Masculino'),
-        ('F', 'Feminino')
-    )
-    choices_turno = (
-        ('M', 'Manhã'),
-        ('T', 'Tarde'),
-        ('N', 'Noite')
-    )
     matricula = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=150)
-    sexo = models.CharField(max_length=20, choices=choices_sexo)
-    dataNasc = models.DateField(default = datetime.datetime.now)
+    sexo = models.CharField(max_length=20)
+    dataNasc = models.DateField()
     localNasc = models.CharField(max_length=30)
     nomePai = models.CharField(max_length=30)
     nomeMae = models.CharField(max_length=30)
@@ -84,19 +83,12 @@ class Aluno(models.Model):
     cidade = models.CharField(max_length=30)
     complemento = models.CharField(max_length=30)
     turma = models.CharField(max_length=10)
-    turno = models.CharField(max_length=20, choices=choices_turno)
+    turno = models.CharField(max_length=20)
     ano = models.CharField(max_length=4)
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Usuário" ,on_delete = models.CASCADE)
+    professor = models.ForeignKey(Professor, verbose_name="Professor_id" ,on_delete = models.CASCADE)
 
     def __str__(self):
-        return f"{self.matricula},{self.sexo}, {self.dataNasc}, {self.localNasc}, {self.nomeMae}, {self.nomePai}, {self.tel}, {self.cep}, {self.logr}, {self.uf}, {self.numero}, {self.bairro}, {self.cidade},{self.complemento}, {self.turma}, {self.turno}, {self.ano}, {self.usuario}"
-
-class Professor(models.Model):
-    email = models.EmailField("E-mail")
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Usuário", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.email
+        return f"{self.matricula} {self.sexo} {self.dataNasc} {self.localNasc} {self.nomeMae} {self.nomePai} {self.tel} {self.cep} {self.logr} {self.uf} {self.numero} {self.bairro} {self.cidade} {self.complemento} {self.turma} {self.turno} {self.ano}"
 
 
 class Quiz(models.Model):

@@ -26,8 +26,3 @@ class CustomUsuarioChangeForm(UserChangeForm):
         fields = ['first_name', 'last_name', 'matricula']
 
 
-class CadastroModelAluno(fm.ModelForm):
-
-    class Meta:
-        model = Aluno
-        fields = ['matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeMae', 'nomePai', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade','complemento', 'turma', 'turno', 'ano', 'usuario']

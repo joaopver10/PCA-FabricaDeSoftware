@@ -1,70 +1,44 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as lg
 from .models import Aluno, Professor, CustomUsuario
-from .forms import CadastroModelAluno
+from django.contrib.auth import get_user_model
 from django.contrib.messages import constants
+
+
 
 @login_required(login_url="professor")
 def painel(request):
-    if str(request.method) == 'POST':
+    novo_aluno = Aluno()
+    if request.method == 'POST':
         try:
-            nome = request.POST.get('nome')
-            email = request.POST.get('email')
-            senha = request.POST.get('senha')
-            sexo = request.POST.get('sexo')
-            dataNasc = request.POST.get('dataNasc')
-            localNasc = request.POST.get('localNasc')
-            nomePai = request.POST.get('nomePai')
-            nomeMae = request.POST.get('nomeMae')
-            tel = request.POST.get('tel')
-            cep = request.POST.get('cep')
-            logr = request.POST.get('logr')
-            uf = request.POST.get('uf')
-            numero = request.POST.get('numero')
-            bairro = request.POST.get('bairro')
-            cidade = request.POST.get('cidade')
-            complemento = request.POST.get('complemento')
-            turma = request.POST.get('turma')
-            turno = request.POST.get('turno')
-            ano = request.POST.get('ano')
-            print(nome, email, senha, sexo, localNasc, dataNasc, nomePai, nomeMae, tel, cep,
-                  logr, numero, bairro, uf,cidade, complemento, turma, turno, ano)
+            novo_aluno.nome = request.POST.get('nome')
+            novo_aluno.sexo = request.POST.get('sexo')
+            novo_aluno.dataNasc = request.POST.get('dataNasc')
+            novo_aluno.localNasc = request.POST.get('localNasc')
+            novo_aluno.nomePai = request.POST.get('nomePai')
+            novo_aluno.nomeMae = request.POST.get('nomeMae')
+            novo_aluno.tel = request.POST.get('tel')
+            novo_aluno.cep = request.POST.get('cep')
+            novo_aluno.logr = request.POST.get('logr')
+            novo_aluno.uf = request.POST.get('uf')
+            novo_aluno.numero = request.POST.get('numero')
+            novo_aluno.bairro = request.POST.get('bairro')
+            novo_aluno.cidade = request.POST.get('cidade')
+            novo_aluno.complemento = request.POST.get('complemento')
+            novo_aluno.turma = request.POST.get('turma')
+            novo_aluno.turno = request.POST.get('turno')
+            novo_aluno.ano = request.POST.get('ano')
+            novo_aluno.professor_id = Professor.objects.filter(usuario_id=request.user.id).first().id
+            novo_aluno.save()
 
-            if len(nome.strip()) == 0 or len(email.strip()) == 0 or len(senha.strip()) == 0 or len(sexo.strip()) == 0 or \
-                    len(dataNasc.strip()) == 0 or len(localNasc.strip()) == 0 or len(nomeMae.strip()) == 0 or \
-                    len(nomePai.strip()) == 0 or len(tel.strip()) == 0 or len(cep.strip()) == 0 or len(logr.strip()) == 0 or\
-                    len(numero.strip()) == 0 or len(cidade.strip()) == 0 or len(bairro.strip()) == 0 or len(uf.strip()) == 0 or\
-                    len(complemento.strip()) == 0 or len(turma.strip()) == 0 or len(turno.strip()) == 0 or len(ano.strip()) == 0:
-                messages.add_message(request, constants.ERROR, 'Preencha todos os campos.')
+            messages.add_message(request, constants.SUCCESS, 'Usuário criado com sucesso.')
+            return render(request, 'painel.html')
 
-                user = CustomUsuario.objects.create_user(
-                    username = nome,
-                    email = email,
-                    password = senha,
-                    sexo = sexo,
-                    dataNasc = dataNasc,
-                    localNasc = localNasc,
-                    nomeMae = nomeMae,
-                    nomePai = nomePai,
-                    logr = logr,
-                    uf = uf,
-                    cidade = cidade,
-                    bairro = bairro,
-                    tel = tel,
-                    cep = cep,
-                    numero = numero,
-                    complemento = complemento,
-                    turma = turma,
-                    turno = turno,
-                    ano = ano,
-                )
-                user.save()
-                messages.add_message(request, constants.SUCCESS, 'Usuário criado com sucesso.')
-                return render(request, 'painel.html')
         except:
             messages.add_message(request, constants.ERROR, 'Erro interno no sistema.')
             return render(request, 'painel.html')
@@ -73,18 +47,23 @@ def painel(request):
 
 
 def professor(request):
+    User = get_user_model()
     if request.method == 'POST':
         try:
             email = request.POST['email']
-            username = CustomUsuario.objects.get(email=email).username
+            username = Professor.objects.get(email=email).email
             senha = request.POST['senha']
-            user = authenticate(request, username=username, password=senha)
-            print(email, senha, username)
-            if user:
-                lg(request, user)
-                return redirect('painel')
+            pk_tabela1 = User.objects.filter(email=email).first().id
+            fk_tabela2 = Professor.objects.filter(email=email).first().usuario_id
+
+            if( pk_tabela1 == fk_tabela2 ):
+                user = authenticate(request, email=username, password=senha)
+                if user:
+                    lg(request, user)
+                    return redirect('painel')
+                messages.error(request, 'E-mail ou senha inválida', extra_tags='login')
         except:
-            messages.error(request, 'Email ou senha inválida', extra_tags='login')
+            messages.error(request, 'E-mail ou senha inválida', extra_tags='login')
             return redirect('professor')
 
     return render(request, 'professor.html')
