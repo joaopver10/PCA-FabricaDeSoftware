@@ -139,6 +139,7 @@ STATIC_ROOT = (BASE_DIR / 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'alert-primary',
@@ -147,5 +148,5 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
-
+SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 AUTH_USER_MODEL = 'core.CustomUsuario'

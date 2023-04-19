@@ -15,7 +15,9 @@
 	<div class="smartphone-menu-trigger"></div>
   <header class="avatar">
 		<img src="{% static 'images/do-utilizador.png' %}" />
-    <h2>Nome do aluno</h2>
+      {% for aluno in context %}
+    <h2>{{ aluno.nome }}</h2>
+      {% endfor%}
   </header>
 	<ul>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/botao-home.png' %}" alt=""><a href="{% url 'portal' %}">Início</a></li>

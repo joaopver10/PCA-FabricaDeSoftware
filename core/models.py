@@ -45,14 +45,15 @@ class UserManager(BaseUserManager):
 class CustomUsuario(AbstractUser):
     """User model."""
 
-    email = models.EmailField("E-mail", unique=True)
-    matricula = models.CharField("Matrícula", max_length=7)
+    email = models.EmailField("E-mail")
+    is_student = models.BooleanField('Aluno status', default=False)
+    is_teacher = models.BooleanField('Professor status', default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
-        return f"{self.email} {self.matricula}"
+        return f"{self.email}"
 
     objects = UserManager() ## This is the new line in the User model. ##
 
@@ -69,11 +70,11 @@ class Aluno(models.Model):
 
     matricula = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=150)
+    email = models.EmailField("E-mail", unique=True)
     sexo = models.CharField(max_length=20)
-    dataNasc = models.DateField()
-    localNasc = models.CharField(max_length=30)
-    nomePai = models.CharField(max_length=30)
-    nomeMae = models.CharField(max_length=30)
+    dataNasc = models.CharField(max_length=10)
+    localNasc = models.CharField(max_length=30, null=True)
+    nomeResponsavel = models.CharField(max_length=30)
     tel = models.CharField(max_length=15)
     cep = models.CharField(max_length=10)
     logr = models.CharField(max_length=50)
@@ -81,14 +82,15 @@ class Aluno(models.Model):
     numero = models.CharField(max_length=5)
     bairro = models.CharField(max_length=30)
     cidade = models.CharField(max_length=30)
-    complemento = models.CharField(max_length=30)
+    complemento = models.CharField(max_length=30, null=True)
     turma = models.CharField(max_length=10)
     turno = models.CharField(max_length=20)
     ano = models.CharField(max_length=4)
     professor = models.ForeignKey(Professor, verbose_name="Professor_id" ,on_delete = models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Usuário", on_delete = models.CASCADE)
 
     def __str__(self):
-        return f"{self.matricula} {self.sexo} {self.dataNasc} {self.localNasc} {self.nomeMae} {self.nomePai} {self.tel} {self.cep} {self.logr} {self.uf} {self.numero} {self.bairro} {self.cidade} {self.complemento} {self.turma} {self.turno} {self.ano}"
+        return f"{self.email}"
 
 
 class Quiz(models.Model):

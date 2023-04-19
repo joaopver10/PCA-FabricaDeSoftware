@@ -13,15 +13,15 @@ class CustomUsuarioAdmin(UserAdmin):
     add_form = CustomUsuarioForm
     form = CustomUsuarioChangeForm
     model = CustomUsuario
-    list_display =('first_name', 'last_name', 'email', 'matricula')
+    list_display =('id','first_name', 'last_name', 'email','is_student', 'is_teacher')
     fieldsets = (
-            (None, {'fields': ('email', 'password')}),
-            ('Informações pessoais', {'fields': ('first_name', 'last_name', 'matricula')}),
+            (None, {'fields': ('email', 'password','is_student' , 'is_teacher')}),
+            ('Informações pessoais', {'fields': ('first_name', 'last_name')}),
             ('Datas Importantes', {'fields': ('last_login', 'date_joined')}),
         )
 
 
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeMae', 'nomePai', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade', 'complemento', 'turma', 'turno', 'ano', 'professor')
+    list_display = ('matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeResponsavel', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade', 'complemento', 'turma', 'turno', 'ano', 'professor_id', 'usuario_id')
 
 admin.site.register(Aluno, AlunoAdmin)

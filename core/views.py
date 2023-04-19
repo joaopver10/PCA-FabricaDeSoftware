@@ -8,20 +8,28 @@ from django.contrib.auth import login as lg
 from .models import Aluno, Professor, CustomUsuario
 from django.contrib.auth import get_user_model
 from django.contrib.messages import constants
-
+from datetime import date, datetime
 
 
 @login_required(login_url="professor")
 def painel(request):
+    User = get_user_model()
     novo_aluno = Aluno()
     if request.method == 'POST':
         try:
+            email = request.POST.get('email')
+            senha = request.POST.get('dataNasc')
+            user = User.objects.create_user(
+                email=email,
+                password=senha,
+                is_student=True
+            )
             novo_aluno.nome = request.POST.get('nome')
             novo_aluno.sexo = request.POST.get('sexo')
+            novo_aluno.email = request.POST.get('email')
             novo_aluno.dataNasc = request.POST.get('dataNasc')
             novo_aluno.localNasc = request.POST.get('localNasc')
-            novo_aluno.nomePai = request.POST.get('nomePai')
-            novo_aluno.nomeMae = request.POST.get('nomeMae')
+            novo_aluno.nomeResponsavel = request.POST.get('nomeResponsavel')
             novo_aluno.tel = request.POST.get('tel')
             novo_aluno.cep = request.POST.get('cep')
             novo_aluno.logr = request.POST.get('logr')
@@ -34,14 +42,18 @@ def painel(request):
             novo_aluno.turno = request.POST.get('turno')
             novo_aluno.ano = request.POST.get('ano')
             novo_aluno.professor_id = Professor.objects.filter(usuario_id=request.user.id).first().id
-            novo_aluno.save()
+            novo_aluno.usuario_id = User.objects.filter(email=request.POST.get('email')).first().id
 
+
+
+
+            user.save()
+            novo_aluno.save()
             messages.add_message(request, constants.SUCCESS, 'Usuário criado com sucesso.')
-            return render(request, 'painel.html')
 
         except:
-            messages.add_message(request, constants.ERROR, 'Erro interno no sistema.')
-            return render(request, 'painel.html')
+            messages.add_message(request, constants.ERROR, 'Esse aluno já esta cadastrado')
+
     return render(request, 'painel.html')
 
 
@@ -70,22 +82,36 @@ def professor(request):
 
 
 def aluno(request):
+    User = get_user_model()
     if request.method == 'POST':
-        id = request.POST['matricula']
-        username = User.objects.get(id=id).username
-        dt_nascimento = request.POST['dt_nascimento']
-        senha = User.objects.get(password=dt_nascimento).password
-        user = authenticate(request, username=username, password=senha)
-        if user:
-                lg(request, user)
-                return redirect('portal')
+        try:
+            matricula = request.POST['matricula']
+            senha = request.POST['dt_nascimento']
+            fk_tabela2 = Aluno.objects.filter(matricula=matricula).first().usuario_id
+            pk_tabela1 = User.objects.filter(id=fk_tabela2).first().id
+
+
+            if (pk_tabela1 == fk_tabela2):
+                email_tabela = User.objects.filter(id=fk_tabela2).first().email
+                user = authenticate(request, username=email_tabela, password=senha)
+                if user:
+                        lg(request, user)
+                        return redirect('portal')
+                messages.error(request, 'E-mail ou senha inválida', extra_tags='login')
+        except:
+            messages.error(request, 'E-mail ou senha inválida', extra_tags='login')
+            return render(request, 'aluno.html')
+
 
     return render(request, 'aluno.html')
 
 
 @login_required(login_url="aluno")
 def portal(request):
-    return render(request, 'portal.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    print(context)
+
+    return render(request, 'portal.html',{'context': context})
 
 
 def matematica(request):
@@ -113,4 +139,4 @@ def ciencias(request):
 
 def sair(request):
     logout(request)
-    return HttpResponseRedirect('aluno')
+    return HttpResponseRedirect('/')
