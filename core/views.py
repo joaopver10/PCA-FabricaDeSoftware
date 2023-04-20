@@ -109,33 +109,38 @@ def aluno(request):
 @login_required(login_url="aluno")
 def portal(request):
     context = Aluno.objects.filter(usuario_id=request.user.id)
-    print(context)
 
     return render(request, 'portal.html',{'context': context})
 
 
 def matematica(request):
-    return render(request, 'matematica.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    return render(request, 'matematica.html',{'context': context} )
 
 
 def ingles(request):
-    return render(request, 'ingles.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    return render(request, 'ingles.html', {'context': context})
 
 
 def geografia(request):
-    return render(request, 'geografia.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    return render(request, 'geografia.html', {'context': context})
 
 
 def historia(request):
-    return render(request, 'historia.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    return render(request, 'historia.html', {'context': context})
 
 
 def portugues(request):
-    return render(request, 'portugues.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    return render(request, 'portugues.html', {'context': context})
 
 
 def ciencias(request):
-    return render(request, 'ciencias.html')
+    context = Aluno.objects.filter(usuario_id=request.user.id)
+    return render(request, 'ciencias.html', {'context': context})
 
 def sair(request):
     logout(request)

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUsuarioChangeForm, CustomUsuarioForm
-from .models import Professor, CustomUsuario, Aluno
+from .models import Professor, CustomUsuario, Aluno, Resultado, Answer, Quiz, Questoes
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
@@ -25,3 +25,15 @@ class AlunoAdmin(admin.ModelAdmin):
     list_display = ('matricula','nome','sexo', 'dataNasc', 'localNasc', 'nomeResponsavel', 'tel', 'cep', 'logr', 'uf', 'numero', 'bairro', 'cidade', 'complemento', 'turma', 'turno', 'ano', 'professor_id', 'usuario_id')
 
 admin.site.register(Aluno, AlunoAdmin)
+
+admin.site.register(Resultado)
+admin.site.register(Quiz)
+
+class AnswerInline(admin.TabularInline):
+    model =  Answer
+
+class QuestoesAdmin(admin.ModelAdmin):
+    inlines = [AnswerInline]
+
+admin.site.register(Questoes, QuestoesAdmin)
+admin.site.register(Answer)

@@ -64,6 +64,9 @@ class Professor(models.Model):
     def __str__(self):
         return self.email
 
+    class Meta:
+        verbose_name_plural = 'Professores'
+
 
 
 class Aluno(models.Model):
@@ -92,6 +95,9 @@ class Aluno(models.Model):
     def __str__(self):
         return f"{self.email}"
 
+    class Meta:
+        verbose_name_plural = 'Alunos'
+
 
 class Quiz(models.Model):
     difculdade = (
@@ -110,7 +116,10 @@ class Quiz(models.Model):
         return f"{self.nome}-{self.topico}"
 
     def get_questions(self):
-        return self.questoes_set.all()
+        return self.questoes_set.all()[:self.num_de_questoes]
+
+    class Meta:
+        verbose_name_plural = 'Quizes'
 
 class Questoes(models.Model):
     pergunta = models.TextField()
@@ -118,10 +127,13 @@ class Questoes(models.Model):
     criado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return {self.pergunta}
+        return self.pergunta
 
     def get_answers(self):
         return self.answer_set.all()
+
+    class Meta:
+        verbose_name_plural = 'Questões'
 
 class Answer(models.Model):
     texto = models.TextField()
@@ -132,9 +144,13 @@ class Answer(models.Model):
     def __str__(self):
         return f"Questão: {self.questao.pergunta}, Resposta: {self.texto}, Correto: {self.correto}"
 
-'''
+
 class Resultado(models.Model):
-    quiz = models.ForeignKey()
-    usuario = models.ForeignKey()
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     pontos = models.FloatField()
-'''
+
+    def __str__(self):
+        return str(self.pk)
+    class Meta:
+        verbose_name_plural = 'Resultados'
