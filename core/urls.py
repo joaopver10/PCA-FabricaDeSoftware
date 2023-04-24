@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import professor, aluno, matematica, ciencias, geografia, historia, portugues, ingles, portal, sair, painel
+from .views import professor, aluno, matematica, ciencias, geografia, historia, portugues, ingles, portal, sair, painel, quiz, QuizListView, quiz_data_view
 
 urlpatterns=[
     path('', aluno, name='aluno'),
@@ -13,6 +13,9 @@ urlpatterns=[
     path('portugues', portugues, name='portugues'),
     path('ingles', ingles, name='ingles'),
     path('painel', painel, name='painel'),
-    path('deslogar', sair ,name='sair')
+    path('deslogar', sair ,name='sair'),
+    path('quiz/', QuizListView.as_view(), name='quiz'),
+    path('quiz/<pk>/', quiz, name='quiz-view'),
+    path('quiz/<pk>/data/', quiz_data_view, name='quiz-data-view')
 
 ]

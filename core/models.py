@@ -5,6 +5,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models import signals
 from django.template.defaultfilters import slugify
+import random
 
 
 class UserManager(BaseUserManager):
@@ -100,7 +101,7 @@ class Aluno(models.Model):
 
 
 class Quiz(models.Model):
-    difculdade = (
+    dificuldade = (
         ('Fácil', 'Fácil'),
         ('Médio', 'Médio'),
         ('Difícil', 'Difícil')
@@ -110,13 +111,15 @@ class Quiz(models.Model):
     num_de_questoes = models.IntegerField()
     tempo = models.IntegerField(help_text="Duração do quiz em minutos")
     pts_necessarios = models.IntegerField(help_text="Pontuação necessária em %")
-    dificuldade = models.CharField(max_length=8, choices=difculdade)
+    dificuldade = models.CharField(max_length=8, choices=dificuldade)
 
     def __str__(self):
         return f"{self.nome}-{self.topico}"
 
     def get_questions(self):
-        return self.questoes_set.all()[:self.num_de_questoes]
+        questoes = list(self.questoes_set.all())
+        random.shuffle(questoes)
+        return questoes[:10]
 
     class Meta:
         verbose_name_plural = 'Quizes'

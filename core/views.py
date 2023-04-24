@@ -1,15 +1,19 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.views.generic import ListView
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as lg
-from .models import Aluno, Professor, CustomUsuario
+from .models import Aluno, Professor, Quiz
 from django.contrib.auth import get_user_model
 from django.contrib.messages import constants
-from datetime import date, datetime
 
+
+
+class QuizListView(ListView):
+    model = Quiz
+    template_name = 'mainQuiz.html'
 
 @login_required(login_url="professor")
 def painel(request):
@@ -141,6 +145,25 @@ def portugues(request):
 def ciencias(request):
     context = Aluno.objects.filter(usuario_id=request.user.id)
     return render(request, 'ciencias.html', {'context': context})
+
+
+def quiz(request, pk):
+    quiz = Quiz.objects.get(pk= pk)
+    return render(request, 'Quiz.html', {'obj': quiz})
+
+def quiz_data_view(request, pk):
+    quiz = Quiz.objects.get(pk= pk)
+    questoes = []
+
+    for q in quiz.get_questions():
+        respostas = []
+        for a in q.get_answers():
+            respostas.append(a.texto)
+        questoes.append({str(q): respostas})
+    return JsonResponse({
+        'data': questoes,
+        'tempo': quiz.tempo
+    })
 
 def sair(request):
     logout(request)

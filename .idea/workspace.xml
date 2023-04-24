@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c2795b-5946-4267-90f1-6226814c29c0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/PCA-FabricaDeSoftware.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PCA-FabricaDeSoftware.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -116,7 +119,8 @@
       <workItem from="1681247007754" duration="38699000" />
       <workItem from="1681849348080" duration="9554000" />
       <workItem from="1681931149521" duration="3073000" />
-      <workItem from="1682012103337" duration="3168000" />
+      <workItem from="1682012103337" duration="12743000" />
+      <workItem from="1682358346756" duration="5559000" />
     </task>
     <servers />
   </component>
