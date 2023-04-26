@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as lg
-from .models import Aluno, Professor, Quiz
+from .models import Aluno, Professor, Quiz, Questoes, Resultado,Answer
 from django.contrib.auth import get_user_model
 from django.contrib.messages import constants
 
@@ -151,6 +151,7 @@ def quiz(request, pk):
     quiz = Quiz.objects.get(pk= pk)
     return render(request, 'Quiz.html', {'obj': quiz})
 
+@login_required(login_url="aluno")
 def quiz_data_view(request, pk):
     quiz = Quiz.objects.get(pk= pk)
     questoes = []
@@ -164,6 +165,63 @@ def quiz_data_view(request, pk):
         'data': questoes,
         'tempo': quiz.tempo
     })
+
+@login_required(login_url="aluno")
+def save_quiz_view(request, pk):
+    resultado = Resultado()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        questions = []
+        data = request.POST
+        data_ = dict(data.lists())
+        data_.pop('csrfmiddlewaretoken')
+
+        for k in data_.keys():
+            question = Questoes.objects.get(pergunta=k)
+            questions.append(question)
+
+        user = Aluno.objects.filter(usuario_id=request.user.id).first().matricula
+        quiz = Quiz.objects.get(pk=pk)
+
+        score = 0
+        multiplier = 100 / quiz.num_de_questoes
+        results = []
+        resp_correta = None
+
+        for q in questions:
+            a_selected = request.POST.get(q.pergunta)
+
+            if a_selected != "":
+                questions_answers = Answer.objects.filter(questao=q)
+                for a in questions_answers:
+                    if a_selected == a.texto:
+                        if a.correto:
+                            score += 1
+                            resp_correta = a.texto
+                    else:
+                        if a.correto:
+                            resp_correta = a.texto
+
+                results.append({str(q): {'resp_correta': resp_correta, 'respondido': a_selected}})
+            else:
+                results.append({str(q): 'Não respondido'})
+
+        score_ = score * multiplier
+
+        resultado.quiz_id = quiz.id
+        resultado.usuario_id = user
+        resultado.pontos = score_
+
+        resultado.save()
+
+        if score_ >= quiz.pts_necessarios:
+            return JsonResponse({'passed': True, 'score': score_, 'results': results})
+        else:
+            return JsonResponse({'passed': False,'score': score_, 'results': results})
+
+
+
+
+    return JsonResponse({'text': 'works'})
 
 def sair(request):
     logout(request)

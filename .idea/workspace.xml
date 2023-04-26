@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c2795b-5946-4267-90f1-6226814c29c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/PCA-FabricaDeSoftware.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PCA-FabricaDeSoftware.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/static/js/quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/static/js/quiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/templates/quiz.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/quiz.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +120,8 @@
       <workItem from="1681931149521" duration="3073000" />
       <workItem from="1682012103337" duration="12743000" />
       <workItem from="1682358346756" duration="5559000" />
+      <workItem from="1682445792765" duration="7823000" />
+      <workItem from="1682523073716" duration="6465000" />
     </task>
     <servers />
   </component>
