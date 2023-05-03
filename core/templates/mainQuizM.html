@@ -34,6 +34,7 @@
         <div class="h1">Lista de Quiz</div>
         <hr>
         {% for obj in object_list %}
+            {% if obj.materia_id == 1 %}
             <button
                     class="btn btn-link modal-button"
                     data-pk="{{obj.pk}}"
@@ -46,5 +47,6 @@
                     data-target="#quizStartModal">
                     {{ obj.nome }}
             </button>
+            {%endif%}
         {%endfor%}
     {% endblock content %}

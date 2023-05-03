@@ -123,7 +123,7 @@ const sendData = () =>{
 
                         if(answer==correto){
                             resDiv.classList.add('bg-success')
-                            resDiv.innerHTML += ` Respondido: ${answer}`
+                            resDiv.innerHTML += ` ** Respondido **: ${answer}`
                         }else{
                             resDiv.classList.add('bg-danger')
                             resDiv.innerHTML += ` | Resposta correta: ${correto}`

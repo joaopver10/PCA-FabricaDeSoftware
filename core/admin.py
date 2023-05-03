@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUsuarioChangeForm, CustomUsuarioForm
-from .models import Professor, CustomUsuario, Aluno, Resultado, Answer, Quiz, Questoes
+from .models import Professor, CustomUsuario, Aluno, Resultado, Answer, Quiz, Questoes, Materias
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
@@ -28,7 +28,7 @@ admin.site.register(Aluno, AlunoAdmin)
 
 admin.site.register(Resultado)
 admin.site.register(Quiz)
-
+admin.site.register(Materias)
 class AnswerInline(admin.TabularInline):
     model =  Answer
 

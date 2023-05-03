@@ -11,9 +11,30 @@ from django.contrib.messages import constants
 
 
 
-class QuizListView(ListView):
+class QuizListViewM(ListView):
     model = Quiz
-    template_name = 'mainQuiz.html'
+    template_name = 'mainQuizM.html'
+
+
+class QuizListViewG(ListView):
+    model = Quiz
+    template_name = 'mainQuizG.html'
+
+class QuizListViewI(ListView):
+    model = Quiz
+    template_name = 'mainQuizI.html'
+
+class QuizListViewP(ListView):
+    model = Quiz
+    template_name = 'mainQuizP.html'
+
+class QuizListViewH(ListView):
+    model = Quiz
+    template_name = 'mainQuizH.html'
+
+class QuizListViewC(ListView):
+    model = Quiz
+    template_name = 'mainQuizC.html'
 
 @login_required(login_url="professor")
 def painel(request):
@@ -149,6 +170,7 @@ def ciencias(request):
 
 def quiz(request, pk):
     quiz = Quiz.objects.get(pk= pk)
+
     return render(request, 'Quiz.html', {'obj': quiz})
 
 @login_required(login_url="aluno")

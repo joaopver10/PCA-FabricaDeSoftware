@@ -99,6 +99,10 @@ class Aluno(models.Model):
     class Meta:
         verbose_name_plural = 'Alunos'
 
+class Materias(models.Model):
+    materia = models.CharField(max_length=120)
+    def __str__(self):
+        return self.materia
 
 class Quiz(models.Model):
     dificuldade = (
@@ -112,6 +116,7 @@ class Quiz(models.Model):
     tempo = models.IntegerField(help_text="Duração do quiz em minutos")
     pts_necessarios = models.IntegerField(help_text="Pontuação necessária em %")
     dificuldade = models.CharField(max_length=8, choices=dificuldade)
+    materia = models.ForeignKey(Materias, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.nome}-{self.topico}"
@@ -146,6 +151,9 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Questão: {self.questao.pergunta}, Resposta: {self.texto}, Correto: {self.correto}"
+
+
+
 
 
 class Resultado(models.Model):
