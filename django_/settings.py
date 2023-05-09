@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os.path
 from pathlib import Path
+
+from django.conf.global_settings import CSRF_TRUSTED_ORIGINS
 from django.contrib.messages import constants
 import dj_database_url
 
@@ -156,3 +158,4 @@ MESSAGE_TAGS = {
 SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 AUTH_USER_MODEL = 'core.CustomUsuario'
 
+CSRF_TRUSTED_ORIGINS
