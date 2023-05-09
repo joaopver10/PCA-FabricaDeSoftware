@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-x13@ulyo7z5#w42t^#g8pnmlc*%n2)z=t&#r%2mem9wa74%3x3
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['*']
 
 # Application definition
 
@@ -158,4 +158,3 @@ MESSAGE_TAGS = {
 SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 AUTH_USER_MODEL = 'core.CustomUsuario'
 
-CSRF_TRUSTED_ORIGINS
