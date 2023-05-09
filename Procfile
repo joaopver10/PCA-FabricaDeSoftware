@@ -1,1 +1,1 @@
-web: gunicorn PCA-FabricaDeSoftware.wsgi --log-file -
+web: gunicorn django_.wsgi --log-file -
