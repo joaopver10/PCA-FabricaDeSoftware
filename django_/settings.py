@@ -87,22 +87,22 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+'''
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'educacional',
+        'NAME': 'railway',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': 'vnuvrHO4j5EOq7yuTlse',
+        'HOST': 'containers.railway.app',
+        'PORT': '6327',
     }
 }
 
-'''
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
-}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
