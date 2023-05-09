@@ -1,0 +1,1 @@
+web: gunicorn PCA-FabricaDeSoftware.wsgi --log-file -
