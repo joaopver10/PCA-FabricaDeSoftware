@@ -1,1 +1,1 @@
-web: gunicorn PCA-FabricaDeSoftware.wsgi --log-file -
+web: python manage.py migrate && gunicorn PCA-FabricaDeSoftware.wsgi --log-file -
