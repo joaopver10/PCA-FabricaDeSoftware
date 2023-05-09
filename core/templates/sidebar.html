@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <title> {% block title %}{% endblock title %} </title>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<nav class="menu" tabindex="0">
+	<div class="smartphone-menu-trigger"></div>
+  <header class="avatar">
+		<img src="{% static 'images/do-utilizador.png' %}" />
+      {% for aluno in context %}
+    <h2>{{ aluno.nome }}</h2>
+      {% endfor%}
+  </header>
+	<ul>
+        <li tabindex="0"><img class="menu-icons" src="{% static 'images/botao-home.png' %}" alt=""><a href="{% url 'portal' %}">Início</a></li>
+        <li tabindex="0"><img class="menu-icons" src="{% static 'images/conquistas.png' %}" alt=""><a href="#">Conquistas</a></li>
+        <li tabindex="0"><img class="menu-icons" src="{% static 'images/perfil.png' %}" alt=""><a href="#">Perfil</a></li>
+        <li tabindex="0"><img class="menu-icons" src="{% static 'images/ajuda.png' %}" alt=""><a href="#">Ajuda</a></li>
+        <li tabindex="0"><img class="menu-icons" src="{% static 'images/sair.png' %}" alt=""><a href="deslogar">Sair</a></li>
+  </ul>
+</nav>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

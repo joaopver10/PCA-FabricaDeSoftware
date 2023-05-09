@@ -1,0 +1,52 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/sidebarPainel.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <title> {% block title %}{% endblock title %} </title>
+    {% block extra_head %}{% endblock %}
+</head>
+
+
+<body>
+
+<section class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+      <a href="{% url 'painel' %}">Painel</a>
+    </div>
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+      <ul class="nav-list">
+        <li>
+          <a href="{% url 'painel' %}">Início</a>
+        </li>
+        <li>
+          <a href="#!">Alunos</a>
+        </li>
+        <li>
+          <a href="#!">Quiz</a>
+        </li>
+
+        <li>
+          <a href="deslogar">Sair</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+
+{% block content %}
+
+{% endblock %}
+
+
+{% block scripts %}
+ <script src="{% static 'js/sidebarPainel.js' %}"></script>
+{% endblock %}
+</body>
+</html>

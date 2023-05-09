@@ -1,0 +1,31 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    Portal do aluno
+{% endblock title %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/portal.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="materias">
+        <div class="conteudo">
+            <ul class="disciplina">
+                <li><a href="{% url 'matematica' %}">Matemática</a></li>
+                <li><a href="{% url 'ciencias' %}">Ciências</a></li>
+                <li><a href="{% url 'geografia' %}">Geografia</a></li>
+                <li><a href="{% url 'historia' %}">História</a></li>
+                <li><a href="{% url 'portugues' %}">Português</a></li>
+                <li><a href="{% url 'ingles' %}">Inglês</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

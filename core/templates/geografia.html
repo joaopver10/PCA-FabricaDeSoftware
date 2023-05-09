@@ -1,0 +1,65 @@
+{% extends 'portal.html' %}
+{% load static %}
+
+
+{% block title %}
+    Geografia
+{% endblock title %}
+
+
+{% block content %}
+
+    <h2 class="tituloMateria">Geografia</h2>
+
+     <div class="materias">
+        <div class="unidades">
+
+            <a href="{% url 'quizG' %}">
+                <div class="estudo">
+                    <img class="icone" src="{% static 'images/aluna.png' %}" alt="">
+                    <p> Unidade 1 </p>
+                </div>
+            </a>
+
+            <a href="#">
+            <div class="estudo">
+                <img class="icone" src="{% static 'images/cadeado.png' %}" alt="">
+                <p> Unidade 2 </p>
+            </div>
+            </a>
+
+            <a href="#">
+                <div class="estudo">
+                    <img class="icone" src="{% static 'images/cadeado.png' %}" alt="">
+                    <p> Unidade 3 </p>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="estudo">
+                    <img class="icone" src="{% static 'images/cadeado.png' %}" alt="">
+                    <p> Unidade 4 </p>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="estudo">
+                    <img class="icone" src="{% static 'images/cadeado.png' %}" alt="">
+                    <p> Unidade 5 </p>
+                </div>
+            </a>
+             <a href="#">
+                <div class="estudo">
+                    <img class="icone" src="{% static 'images/cadeado.png' %}" alt="">
+                    <p> Unidade 6 </p>
+                </div>
+             </a>
+        </div>
+    </div>
+
+{% endblock %}</title>
+</head>
+<body>
+
+</body>
+</html>
