@@ -171,7 +171,7 @@ def ciencias(request):
 def quiz(request, pk):
     quiz = Quiz.objects.get(pk= pk)
 
-    return render(request, 'Quiz.html', {'obj': quiz})
+    return render(request, 'quiz.html', {'obj': quiz})
 
 @login_required(login_url="aluno")
 def quiz_data_view(request, pk):
