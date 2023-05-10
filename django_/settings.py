@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x13@ulyo7z5#w42t^#g8pnmlc*%n2)z=t&#r%2mem9wa74%3x3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://peekky.com', 'https://web-production-870f.up.railway.app','https://www.peekky.com']
