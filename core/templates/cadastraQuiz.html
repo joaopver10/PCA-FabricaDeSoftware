@@ -1,0 +1,130 @@
+{% extends 'sidebarPainel.html' %}
+{% load static %}
+{% block title %}
+    Cadastra Quiz
+{% endblock title %}
+
+
+{% block extra_head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/painel.css' %}">
+{% endblock %}
+
+{% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 bg-side">
+                    <div class="body-form">
+
+
+                        <div class="materias">
+                        <div class="conteudo">
+                            <ul class="disciplina">
+                                <li id="quiz"><a href="{% url 'cadastraQuiz' %}" >Cadastrar Quiz</a></li>
+                                <li><a href="{% url 'cadastraQuestao' %}">Cadastrar Questões</a></li>
+                                <li><a href="{% url 'cadastraResposta' %}">Cadastrar Respostas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                        {% if messages %}
+                            <br>
+                            {% for message in messages %}
+                                <div class="alert {{message.tags}}">
+                                    {{message}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <p>Cadastro do Quiz</p>
+                        <hr>
+
+                        <form action="{% url 'cadastraQuiz' %}" method="POST"  class="needs-validation" novalidate >
+                            {% csrf_token %}
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <span>Nome do quiz:</span>
+                                    <input type="text" class="form-control"  name="nome" required>
+                                    <div class="invalid-feedback">Informe o nome do quiz</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <span>Tópico:</span>
+                                    <input type="text" class="form-control"  name="topico" required>
+                                    <div class="invalid-feedback" >Informe o tópico abordado</div>
+                                    <br>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>Número de questões:</span>
+                                    <input type="number" class="form-control" name="qtd" required>
+                                    <div class="invalid-feedback">Informe a quantidade de questões</div>
+                                </div>
+                                    <div class="col-md-3">
+                                    <span>Minutos do quiz:</span>
+                                    <input type="number" class="form-control" min="1" max="10" name="tempo"  required>
+                                        <span class="invalid-feedback">Informe os minutos entre 1 e 10 minutos</span>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <span>Dificuldade:</span>
+                                        <select class="form-select" name="dificuldade" required>
+                                            <option value="" data-default disabled selected>Escolha a Dificuldade</option>
+                                            <option value="Fácil">Fácil</option>
+                                            <option value="Médio">Médio</option>
+                                            <option value="Difícil">Difícil</option>
+                                        </select>
+                                        <span class="invalid-feedback">Informe a Dificuldade</span>
+                                </div>
+                                    <div class="col-md-4">
+                                    <span>Matéria:</span>
+                                        <select class="form-select"  name="materia" required>
+                                            <option value="" data-default disabled selected>Escolha a Matéria</option>
+                                            <option value="1" >Matemática</option>
+                                            <option value="2" >Português</option>
+                                            <option value="3" >História</option>
+                                            <option value="4" >Inglês</option>
+                                            <option value="5" >Geografia</option>
+                                            <option value="6" >Ciências</option>
+                                        </select>
+                                        <span class="invalid-feedback">Informe a matéria</span>
+                                        <br>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>Pontuação em %:</span>
+                                    <input type="number" class="form-control" min="10" maxlength="100" placeholder="De 10% a 100%" name="pts" required>
+                                    <div class="invalid-feedback">Informe a pontuação em %</div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="botao">
+                                <button type="submit" class="btn btn-primary" >Salvar</button>
+
+                                <button type="reset" class="btn btn-secondary">Limpar Campo</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script >
+         (function () {
+              'use strict'
+
+              var forms = document.querySelectorAll('.needs-validation')
+              Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+            })()
+    </script>
+{%endblock%}
+

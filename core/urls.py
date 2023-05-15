@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from .views import professor, aluno, matematica, ciencias, geografia,\
-    historia, portugues, ingles, portal, sair, painel, quiz,\
+    historia, portugues, ingles, portal, sair, painel, quiz, cadastraQuiz, cadastraResposta, cadastraQuestao,\
     QuizListViewM, QuizListViewG, QuizListViewI, QuizListViewC, QuizListViewH,QuizListViewP,  quiz_data_view, save_quiz_view
 
 urlpatterns=[
@@ -15,7 +15,10 @@ urlpatterns=[
     path('portugues', portugues, name='portugues'),
     path('ingles', ingles, name='ingles'),
     path('painel', painel, name='painel'),
-    path('deslogar', sair ,name='sair'),
+    path('cadastraQuiz', cadastraQuiz, name='cadastraQuiz'),
+    path('cadastraResposta', cadastraResposta, name='cadastraResposta'),
+    path('cadastraQuestao', cadastraQuestao, name='cadastraQuestao'),
+    path('deslogar', sair,name='sair'),
     path('quizMatematica/', QuizListViewM.as_view(), name='quizM'),
     path('quizGeografia/', QuizListViewG.as_view(), name='quizG'),
     path('quizIngles/', QuizListViewI.as_view(), name='quizI'),

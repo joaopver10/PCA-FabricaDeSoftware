@@ -71,7 +71,6 @@ class Professor(models.Model):
 
 
 class Aluno(models.Model):
-
     matricula = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=150)
     email = models.EmailField("E-mail", unique=True)
@@ -105,17 +104,12 @@ class Materias(models.Model):
         return self.materia
 
 class Quiz(models.Model):
-    dificuldade = (
-        ('Fácil', 'Fácil'),
-        ('Médio', 'Médio'),
-        ('Difícil', 'Difícil')
-    )
     nome = models.CharField(max_length=120)
     topico =models.CharField(max_length=120)
     num_de_questoes = models.IntegerField()
     tempo = models.IntegerField(help_text="Duração do quiz em minutos")
     pts_necessarios = models.IntegerField(help_text="Pontuação necessária em %")
-    dificuldade = models.CharField(max_length=8, choices=dificuldade)
+    dificuldade = models.CharField(max_length=8)
     materia = models.ForeignKey(Materias, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -163,5 +157,6 @@ class Resultado(models.Model):
 
     def __str__(self):
         return str(self.pk)
+
     class Meta:
         verbose_name_plural = 'Resultados'

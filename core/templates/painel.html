@@ -41,7 +41,11 @@
                                     </div>
                                 <div class="col-4">
                                     <span>Sexo</span>
-                                    <input type="text" class="form-control" name="sexo" required>
+                                    <select class="form-select" name="sexo" required>
+                                        <option  data-default disabled selected>Escolha o Sexo</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                    </select>
                                     <div class="invalid-feedback">Informe o sexo</div>
                                 </div>
                             </div>
@@ -114,7 +118,7 @@
 
                                 </div>
                                 <br>
-                                <p>Dados do aluno</p>
+                                <p>Dados sobre a turma do aluno</p>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md">
@@ -125,12 +129,16 @@
                                     </div>
                                     <div class="col-md">
                                         <span>Turno:</span>
-                                        <input type="text" class="form-control"  name="turno" required>
+                                        <select class="form-select" name="turno" required>
+                                            <option value="" data-default disabled selected>Escolha o Turno</option>
+                                            <option value="Manhã">Manhã</option>
+                                            <option value="Tarde">Tarde</option>
+                                        </select>
                                         <span class="invalid-feedback">Informe o turno</span>
                                         <br>
                                     </div>
                                     <div class="col-md">
-                                        <span>Ano:</span>
+                                        <span>Ano/Série:</span>
                                         <input type="number" class="form-control"  name="ano" required>
                                         <span class="invalid-feedback">Informe o ano</span>
                                         <br>

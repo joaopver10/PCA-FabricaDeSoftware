@@ -70,5 +70,60 @@ p{
     justify-content: space-between;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 
+}
+input[type=number] {
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}
+
+
+.materias{
+    display: flex;
+    justify-content: center;
+}
+
+.conteudo{
+    margin-top: -40px;
+    margin-bottom: 30px;
+}
+
+.disciplina{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.disciplina li{
+    background-color: rgba(0, 0, 0, 0.67);
+    margin: 10px;
+    padding: 10px 22px;
+    list-style: none;
+    border-radius: 5px;
+
+}
+
+.disciplina a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1);
+}
+
+.disciplina li:hover{
+    background-color: rgba(230, 8, 8, 0.8);
+    cursor: pointer;
+}
+.disciplina #quiz {
+    background-color: red;
+}
+
+.disciplina #quest  {
+    background-color: red;
+}
+
+.disciplina #resp  {
+    background-color: red;
+}
 

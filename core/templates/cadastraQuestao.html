@@ -1,0 +1,96 @@
+{% extends 'sidebarPainel.html' %}
+{% load static %}
+{% block title %}
+    Cadastra Quiz
+{% endblock title %}
+
+
+{% block extra_head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/painel.css' %}">
+{% endblock %}
+
+{% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 bg-side">
+                    <div class="body-form">
+
+                        <div class="materias">
+                        <div class="conteudo">
+                            <ul class="disciplina">
+                                <li><a href="{% url 'cadastraQuiz' %}">Cadastrar Quiz</a></li>
+                                <li  id="quest"><a href="{% url 'cadastraQuestao' %}">Cadastrar Questão</a></li>
+                                <li><a href="{% url 'cadastraResposta' %}">Cadastrar Respostas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                        {% if messages %}
+                            <br>
+                            {% for message in messages %}
+                                <div class="alert {{message.tags}}">
+                                    {{message}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <p>Cadastro da Questão</p>
+                        <hr>
+                        <form action="{% url 'cadastraQuestao' %}" method="POST"  class="needs-validation" novalidate >
+                            {% csrf_token %}
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                        <span>Quiz:</span>
+                                        <select class="form-select" name="quiz" required>
+                                            <option value="" data-default disabled selected>Escolha o Quiz</option>
+                                            {% for obj in contexto %}
+                                            <option value="{{ obj.id }}">{{ obj.nome }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <span class="invalid-feedback">Informe o quiz</span>
+                                    </div>
+                                <div class="row">
+                                    <span>Pergunta:</span>
+                                    <textarea rows="5" cols="50" class="form-control"  name="pergunta" required></textarea>
+                                    <div class="invalid-feedback">Informe a pergunta do quiz</div>
+                                </div>
+
+
+                            <br>
+
+                            <div class="botao">
+                                <button type="submit" class="btn btn-primary" >Salvar</button>
+
+                                <button type="reset" class="btn btn-secondary">Limpar Campo</button>
+                            </div>
+                            </div>
+                        </form>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script >
+         (function () {
+              'use strict'
+
+              var forms = document.querySelectorAll('.needs-validation')
+              Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+            })()
+    </script>
+{%endblock%}
+

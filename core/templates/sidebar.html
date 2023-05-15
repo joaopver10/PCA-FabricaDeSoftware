@@ -18,6 +18,13 @@
       {% for aluno in context %}
     <h2>{{ aluno.nome }}</h2>
       {% endfor%}
+      {% if result%}
+          <p></p>
+    <p> Pontos: {{ result.sum_pontos|floatformat:2}}</p>
+      {% endif%}
+  {% if result and result.sum_pontos > 100 %}
+        <h2>teste</h2>
+  {% endif%}
   </header>
 	<ul>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/botao-home.png' %}" alt=""><a href="{% url 'portal' %}">Início</a></li>

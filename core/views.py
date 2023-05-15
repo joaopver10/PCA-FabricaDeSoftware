@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import ListView
 from django.shortcuts import render, redirect
@@ -39,9 +40,16 @@ class QuizListViewC(ListView):
 @login_required(login_url="professor")
 def painel(request):
     User = get_user_model()
-    novo_aluno = Aluno()
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is False:
+       return redirect('/')
+
     if request.method == 'POST':
         try:
+
+            User = get_user_model()
+            novo_aluno = Aluno()
+
             email = request.POST.get('email')
             senha = request.POST.get('dataNasc')
             user = User.objects.create_user(
@@ -82,6 +90,84 @@ def painel(request):
     return render(request, 'painel.html')
 
 
+def cadastraQuiz(request):
+    if request.method == 'POST':
+        try:
+            novo_quiz = Quiz()
+            novo_quiz.nome = request.POST.get('nome')
+            novo_quiz.topico = request.POST.get('topico')
+            novo_quiz.num_de_questoes = request.POST.get('qtd')
+            novo_quiz.tempo = request.POST.get('tempo')
+            novo_quiz.materia_id = request.POST.get('materia')
+            novo_quiz.dificuldade = request.POST.get('dificuldade')
+            novo_quiz.pts_necessarios = request.POST.get('pts')
+
+            novo_quiz.save()
+
+            messages.add_message(request, constants.SUCCESS, 'Quiz criado com sucesso.')
+        except:
+            messages.add_message(request, constants.ERROR, 'Ocorreu algum erro, tente novamente em instantes...')
+
+
+    return render(request, 'cadastraQuiz.html',)
+
+
+def cadastraQuestao(request):
+    nova_questao = Questoes()
+    contexto = Quiz.objects.all()
+
+    if request.method == 'POST':
+        try:
+            nova_questao.pergunta = request.POST.get('pergunta')
+            nova_questao.quiz_id = request.POST.get('quiz')
+            nova_questao.save()
+
+            messages.add_message(request, constants.SUCCESS, 'Questão cadastrada com sucesso.')
+        except:
+            messages.add_message(request, constants.ERROR, 'Ocorreu algum erro, tente novamente em instantes...')
+    return render(request, 'cadastraQuestao.html', {'contexto': contexto })
+
+def cadastraResposta(request):
+    contextoQ = Questoes.objects.all()
+    nova_resp = Answer()
+    nova_resp2 = Answer()
+    nova_resp3 = Answer()
+    nova_resp4 = Answer()
+
+    if request.method == 'POST':
+        try:
+            nova_resp.questao_id = request.POST.get('questao')
+            nova_resp2.questao_id = request.POST.get('questao')
+            nova_resp3.questao_id = request.POST.get('questao')
+            nova_resp4.questao_id = request.POST.get('questao')
+
+            nova_resp.texto = request.POST.get('resposta')
+            nova_resp2.texto = request.POST.get('resposta2')
+            nova_resp3.texto = request.POST.get('resposta3')
+            nova_resp4.texto = request.POST.get('resposta4')
+
+            if request.POST.get('c1'):
+                nova_resp.correto = request.POST.get('c1')
+
+            if request.POST.get('c2'):
+                nova_resp2.correto = request.POST.get('c2')
+
+            if request.POST.get('c3'):
+                nova_resp3.correto = request.POST.get('c3')
+
+            if request.POST.get('c4'):
+                nova_resp4.correto = request.POST.get('c4')
+
+            nova_resp.save()
+            nova_resp2.save()
+            nova_resp3.save()
+            nova_resp4.save()
+
+            messages.add_message(request, constants.SUCCESS, 'Respostas cadastrada com sucesso.')
+        except:
+            messages.add_message(request, constants.ERROR, 'Ocorreu algum erro, tente novamente em instantes...')
+
+    return render(request, 'cadastraResposta.html', {'contextoQ': contextoQ})
 
 def professor(request):
     User = get_user_model()
@@ -133,38 +219,81 @@ def aluno(request):
 
 @login_required(login_url="aluno")
 def portal(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+    contextP = Resultado.objects.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula)
 
-    return render(request, 'portal.html',{'context': context})
+    result = contextP.values('pontos').aggregate(sum_pontos=Sum('pontos'))
+
+    totalPts = contextP.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula).aggregate(total=Sum('pontos'))['total']
+    totalPtsFormatado = round(totalPts, 2)
+
+
+
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+       return redirect('painel')
+
+    return render(request, 'portal.html',{'context': context, 'contextP': contextP, 'result': result})
 
 
 def matematica(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+        return redirect('painel')
+
     return render(request, 'matematica.html',{'context': context} )
 
 
 def ingles(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+       return redirect('painel')
+
     return render(request, 'ingles.html', {'context': context})
 
 
 def geografia(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+        return redirect('painel')
+
     return render(request, 'geografia.html', {'context': context})
 
 
 def historia(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+        return redirect('painel')
+
     return render(request, 'historia.html', {'context': context})
 
 
 def portugues(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+        return redirect('painel')
+
     return render(request, 'portugues.html', {'context': context})
 
 
 def ciencias(request):
+    User = get_user_model()
     context = Aluno.objects.filter(usuario_id=request.user.id)
+
+    if User.objects.filter(id=request.user.id).first().is_teacher is True:
+        return redirect('painel')
+
     return render(request, 'ciencias.html', {'context': context})
 
 
@@ -248,3 +377,5 @@ def save_quiz_view(request, pk):
 def sair(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
