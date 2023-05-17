@@ -48,8 +48,8 @@ main .helper span {
   width: 100px;
   border-radius: 50%;
   overflow: hidden;
-
 }
+
 .menu .avatar h2 {
   font-weight: 800 ;
   font-size: 1em;
@@ -57,6 +57,7 @@ main .helper span {
   margin-bottom: 15px;
   color: black;
   font-style: italic;
+
 }
 
 .menu .avatar p{
@@ -101,6 +102,30 @@ main .helper span {
   outline: none;
 }
 
+.pontosPerfil{
+  background: #763c9f85;
+  padding: 10px;
+  margin-top: -20px;
+  margin-bottom: 25px;
+  align-self: center;
+  width: 50%;
+  border-radius: 5px;
+
+}
+
+.menu .avatar .textp{
+  font-weight: 300;
+  font-size: 0.9em;
+  margin: 0 auto;
+
+}
+
+.textPontos{
+  opacity: 0.6;
+  text-decoration: underline;
+  font-style: italic;
+  font-size: 14px;
+}
 
 @media screen and (max-width:768px) {
   body {

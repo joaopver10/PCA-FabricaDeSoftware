@@ -252,9 +252,12 @@ def conquista(request):
 
         if totalPts:
             totalPtsFormatado = round(totalPts, 2)
+        else:
+            totalPtsFormatado = 0
 
         if User.objects.filter(id=request.user.id).first().is_teacher is True:
            return redirect('painel')
+
     except:
         return render(request, 'conquista.html')
 

@@ -14,24 +14,34 @@
 <nav class="menu" tabindex="0">
 	<div class="smartphone-menu-trigger"></div>
   <header class="avatar">
-		<img src="{% static 'images/do-utilizador.png' %}" />
-      {% for aluno in context %}
-    <h2>{{ aluno.nome }}</h2>
-      {% endfor%}
+
       {% if result%}
-
-    <p> Pontos: {{ result.sum_pontos|floatformat:2}}</p>
+          <div class="pontosPerfil">
+            <p class="textp"> Pontos: {{ result.sum_pontos|floatformat:2}}</p>
+          </div>
       {% endif%}
-  {% if result and result.sum_pontos >= 100 and result.sum_pontos < 400 %}
-        <h2>Eu estou apenas começando.</h2>
-  {% endif%}
-    {% if result and result.sum_pontos >= 400 and result.sum_pontos < 600%}
-        <h2>Estrela em Ascenção.</h2>
-  {% endif%}
-      {% if result and result.sum_pontos >= 600  %}
-        <h2>Evolução em andamento...</h2>
-  {% endif%}
 
+      <img src="{% static 'images/do-utilizador.png' %}" />
+      {% for aluno in context %}
+        <h2>{{ aluno.nome }}</h2>
+      {% endfor%}
+
+      {% if result and result.sum_pontos >= 100 and result.sum_pontos < 400 %}
+          <div class="textPontos">
+            <p style="text-decoration: underline;">Eu estou apenas começando.</p>
+          </div>
+      {% endif%}
+      {% if result and result.sum_pontos >= 400 and result.sum_pontos < 600%}
+          <div class="textPontos">
+            <p style="text-decoration: underline;">Estrela em Ascenção.</p>
+          </div>
+      {% endif%}
+
+      {% if result and result.sum_pontos >= 600  %}
+          <div class="textPontos">
+            <p style="text-decoration: underline;">Evolução em andamento...</p>
+          </div>
+      {% endif%}
   </header>
 	<ul>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/botao-home.png' %}" alt=""><a href="{% url 'portal' %}">Início</a></li>
