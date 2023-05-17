@@ -19,16 +19,23 @@
     <h2>{{ aluno.nome }}</h2>
       {% endfor%}
       {% if result%}
-          <p></p>
+
     <p> Pontos: {{ result.sum_pontos|floatformat:2}}</p>
       {% endif%}
-  {% if result and result.sum_pontos > 100 %}
-        <h2>teste</h2>
+  {% if result and result.sum_pontos >= 100 and result.sum_pontos < 400 %}
+        <h2>Eu estou apenas começando.</h2>
   {% endif%}
+    {% if result and result.sum_pontos >= 400 and result.sum_pontos < 600%}
+        <h2>Estrela em Ascenção.</h2>
+  {% endif%}
+      {% if result and result.sum_pontos >= 600  %}
+        <h2>Evolução em andamento...</h2>
+  {% endif%}
+
   </header>
 	<ul>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/botao-home.png' %}" alt=""><a href="{% url 'portal' %}">Início</a></li>
-        <li tabindex="0"><img class="menu-icons" src="{% static 'images/conquistas.png' %}" alt=""><a href="#">Conquistas</a></li>
+        <li tabindex="0"><img class="menu-icons" src="{% static 'images/conquistas.png' %}" alt=""><a href="{% url 'conquista' %}">Conquistas</a></li>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/perfil.png' %}" alt=""><a href="#">Perfil</a></li>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/ajuda.png' %}" alt=""><a href="#">Ajuda</a></li>
         <li tabindex="0"><img class="menu-icons" src="{% static 'images/sair.png' %}" alt=""><a href="deslogar">Sair</a></li>

@@ -1,12 +1,13 @@
 from django.urls import path, include
 
-from .views import professor, aluno, matematica, ciencias, geografia,\
+from .views import professor, aluno, matematica, ciencias, geografia, conquista,\
     historia, portugues, ingles, portal, sair, painel, quiz, cadastraQuiz, cadastraResposta, cadastraQuestao,\
     QuizListViewM, QuizListViewG, QuizListViewI, QuizListViewC, QuizListViewH,QuizListViewP,  quiz_data_view, save_quiz_view
 
 urlpatterns=[
     path('aluno', aluno, name='aluno'),
     path('', portal, name='portal'),
+    path('conquista', conquista, name='conquista'),
     path('professor', professor, name='professor'),
     path('matematica', matematica, name='matematica'),
     path('ciencias', ciencias, name='ciencias'),

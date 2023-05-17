@@ -219,23 +219,46 @@ def aluno(request):
 
 @login_required(login_url="aluno")
 def portal(request):
-    User = get_user_model()
-    context = Aluno.objects.filter(usuario_id=request.user.id)
-    contextP = Resultado.objects.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula)
+    try:
+        User = get_user_model()
+        context = Aluno.objects.filter(usuario_id=request.user.id)
+        contextP = Resultado.objects.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula)
 
-    result = contextP.values('pontos').aggregate(sum_pontos=Sum('pontos'))
+        result = contextP.values('pontos').aggregate(sum_pontos=Sum('pontos'))
 
-    totalPts = contextP.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula).aggregate(total=Sum('pontos'))['total']
-    totalPtsFormatado = round(totalPts, 2)
-
-
+        totalPts = contextP.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula).aggregate(total=Sum('pontos'))['total']
 
 
-    if User.objects.filter(id=request.user.id).first().is_teacher is True:
-       return redirect('painel')
+        if totalPts:
+            totalPtsFormatado = round(totalPts, 2)
+
+        if User.objects.filter(id=request.user.id).first().is_teacher is True:
+           return redirect('painel')
+    except:
+        return render(request, 'portal.html')
 
     return render(request, 'portal.html',{'context': context, 'contextP': contextP, 'result': result})
 
+
+def conquista(request):
+    try:
+        global totalPtsFormatado
+        User = get_user_model()
+        context = Aluno.objects.filter(usuario_id=request.user.id)
+        contextP = Resultado.objects.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula)
+
+        totalPts = contextP.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula).aggregate(total=Sum('pontos'))['total']
+
+
+        if totalPts:
+            totalPtsFormatado = round(totalPts, 2)
+
+        if User.objects.filter(id=request.user.id).first().is_teacher is True:
+           return redirect('painel')
+    except:
+        return render(request, 'conquista.html')
+
+    return render(request, 'conquista.html', {'context': context, 'totpontos': totalPtsFormatado})
 
 def matematica(request):
     User = get_user_model()

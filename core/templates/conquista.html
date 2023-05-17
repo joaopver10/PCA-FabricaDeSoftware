@@ -1,0 +1,90 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    Conquistas
+{% endblock title %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/portal.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="contconteudo">
+        <div class="conteudo">
+
+            {% if totpontos < 100 %}
+            <div class="conquistas">
+                <div class="conquistascont">
+                    <img src="{% static 'images/parabens.png' %}" alt="">
+                    <div class="textconq">
+                        <p>Eu estou apenas começando.</p>
+                        <br>
+                        <p style="font-style: italic;  opacity: 0.5;">(Para liberar é necessário ter 100 pontos...)</p>
+                    </div>
+                </div>
+            </div>
+            {% elif totpontos >= 100  %}
+                <div class="conqvitoria">
+                <div class="conquistascont">
+                    <img src="{% static 'images/parabens.png' %}" alt="">
+                    <div class="textconq">
+                        <p>Eu estou apenas começando.</p>
+
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        {% if totpontos < 400 %}
+            <div class="conquistas">
+                <div class="conquistascont">
+                    <img src="{% static 'images/premio.png' %}" alt="">
+                    <div class="textconq">
+                        <p>  Estrela em Ascenção.</p>
+                        <br>
+                        <p style="font-style: italic;  opacity: 0.5;">(Para liberar é necessário ter 400 pontos...)</p>
+                    </div>
+                </div>
+            </div>
+
+        {% elif totpontos >= 400  %}
+            <div class="conqvitoria">
+                <div class="conquistascont">
+                    <img src="{% static 'images/premio.png' %}" alt="">
+                    <div class="textconq">
+                        <p>Estrela em Ascenção.‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        {% if totpontos < 600 %}
+            <div class="conquistas">
+                <div class="conquistascont">
+                    <img src="{% static 'images/trofeu2.png' %}" alt="">
+                    <div class="textconq">
+                        <p>Evolução em andamento...</p>
+                        <br>
+                        <p style="font-style: italic;  opacity: 0.5;">(Para liberar é necessário ter 600 pontos...)</p>
+                    </div>
+                </div>
+            </div>
+        {% elif totpontos >= 600 %}
+            <div class="conqvitoria">
+                <div class="conquistascont">
+                    <img src="{% static 'images/trofeu2.png' %}" alt="">
+                    <div class="textconq">
+                        <p>Evolução em andamento...</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+
+
+
+{% endblock %}
