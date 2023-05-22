@@ -31,6 +31,11 @@
                                 <div class="alert {{message.tags}}">
                                     {{message}}
                                 </div>
+                                {% if 'cadastradas' in message.extra_tags %}
+                                    <div class="alert {{message.tags}}">
+                                     Numero de questões cadastradas: {{contextoQ}}
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         {% endif %}
                         <p>Cadastro da Questão</p>
@@ -38,14 +43,14 @@
                         <form action="{% url 'cadastraQuestao' %}" method="POST"  class="needs-validation" novalidate >
                             {% csrf_token %}
                             <div class="row g-2">
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                         <span>Quiz:</span>
                                         <select class="form-select" name="quiz" required>
                                             <option value="" data-default disabled selected>Escolha o Quiz</option>
                                             {% for obj in contexto %}
-                                            <option value="{{ obj.id }}">{{ obj.nome }}</option>
+                                            <option value="{{ obj.id }}">{{ obj.nome }} | Questões necessárias: {{ obj.num_de_questoes }} </option>
                                             {% endfor %}
-                                        </select>
+                                            </select>
                                         <span class="invalid-feedback">Informe o quiz</span>
                                     </div>
                                 <div class="row">

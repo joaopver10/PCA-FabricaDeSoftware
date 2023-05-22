@@ -83,7 +83,6 @@ def painel(request):
             user.save()
             novo_aluno.save()
             messages.add_message(request, constants.SUCCESS, 'Usuário criado com sucesso.')
-
         except:
             messages.add_message(request, constants.ERROR, 'Esse aluno já esta cadastrado')
 
@@ -115,17 +114,18 @@ def cadastraQuiz(request):
 def cadastraQuestao(request):
     nova_questao = Questoes()
     contexto = Quiz.objects.all()
-
+    contextoQ = Questoes.objects.filter(quiz_id=request.POST.get('quiz')).count() + 1
     if request.method == 'POST':
         try:
             nova_questao.pergunta = request.POST.get('pergunta')
             nova_questao.quiz_id = request.POST.get('quiz')
             nova_questao.save()
 
-            messages.add_message(request, constants.SUCCESS, 'Questão cadastrada com sucesso.')
+            messages.add_message(request, constants.SUCCESS, 'Questão cadastrada com sucesso.', extra_tags='cadastradas')
         except:
             messages.add_message(request, constants.ERROR, 'Ocorreu algum erro, tente novamente em instantes...')
-    return render(request, 'cadastraQuestao.html', {'contexto': contexto })
+
+    return render(request, 'cadastraQuestao.html', {'contexto': contexto, 'contextoQ': contextoQ})
 
 def cadastraResposta(request):
     contextoQ = Questoes.objects.all()
@@ -227,6 +227,9 @@ def portal(request):
         result = contextP.values('pontos').aggregate(sum_pontos=Sum('pontos'))
 
         totalPts = contextP.filter(usuario_id=Aluno.objects.filter(usuario_id=request.user.id).first().matricula).aggregate(total=Sum('pontos'))['total']
+
+
+
 
 
         if totalPts:

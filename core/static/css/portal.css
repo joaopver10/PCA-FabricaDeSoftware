@@ -138,6 +138,35 @@
 }
 
 
+.atTexto{
+    margin-top: 190px;
+    color: black;
+    text-align: center;
+    border-bottom: #625e5e solid 1px;
+    width: 60%;
+    padding: 5px;
+}
+
+
+
+.atualizacoes{
+    display: flex;
+}
+
+.historico{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.historico-texto{
+    color: black;
+    margin: 15px;
+    text-align: center;
+    background-color: rgba(215, 215, 215, 0.85);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
 @media only screen and (max-width: 1366px){
     .unidades{
         width: 70%;

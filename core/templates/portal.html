@@ -25,7 +25,18 @@
     </div>
 
 
+        <div class="atTexto">
+            <h2>Histórico de atividades</h2>
+        </div>
 
-
+    <div class="atualizacoes">
+            <div class="historico">
+                {% for obj in contextP%}
+                    <div class="historico-texto">
+                        <p>Você conseguiu <b>{{ obj.pontos|floatformat:2 }}</b> pontos no quiz <b>{{ obj.quiz}}</b>. </p>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
 
 {% endblock %}
