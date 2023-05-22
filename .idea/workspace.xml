@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c2795b-5946-4267-90f1-6226814c29c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/core/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,8 +63,11 @@
       <recent name="C:\Users\joaop\Documents\GitHub\PCA-FabricaDeSoftware\core\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.base.html">
+  <component name="RunManager" selected="Node.js.quiz.js">
     <configuration name="base.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/tcc/core/templates/base.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="quiz.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/core/static/js/quiz.js" working-dir="$PROJECT_DIR$/core/static/js">
       <method v="2" />
     </configuration>
     <configuration name="PCA-FabricaDeSoftware" type="Python.DjangoServer" factoryName="Django server">
@@ -90,6 +95,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.quiz.js" />
         <item itemvalue="JavaScript Debug.base.html" />
       </list>
     </recent_temporary>
@@ -155,7 +161,7 @@
       <workItem from="1684523231252" duration="776000" />
       <workItem from="1684529629931" duration="1202000" />
       <workItem from="1684703292586" duration="635000" />
-      <workItem from="1684762808497" duration="11474000" />
+      <workItem from="1684762808497" duration="13558000" />
     </task>
     <servers />
   </component>

@@ -347,6 +347,7 @@ def quiz_data_view(request, pk):
 @login_required(login_url="aluno")
 def save_quiz_view(request, pk):
     resultado = Resultado()
+
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         questions = []
         data = request.POST
