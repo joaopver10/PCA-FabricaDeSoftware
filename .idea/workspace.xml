@@ -61,7 +61,10 @@
       <recent name="C:\Users\joaop\Documents\GitHub\PCA-FabricaDeSoftware\core\templates" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.base.html">
+    <configuration name="base.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/tcc/core/templates/base.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="PCA-FabricaDeSoftware" type="Python.DjangoServer" factoryName="Django server">
       <module name="tcc" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,6 +88,11 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.base.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
