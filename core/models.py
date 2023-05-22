@@ -118,7 +118,7 @@ class Quiz(models.Model):
     def get_questions(self):
         questoes = list(self.questoes_set.all())
         random.shuffle(questoes)
-        return questoes[:10]
+        return questoes[:11]
 
     class Meta:
         verbose_name_plural = 'Quizes'
