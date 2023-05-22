@@ -114,14 +114,14 @@ const sendData = () =>{
                     const cls = ['container', 'p-3', 'text-light', 'h6']
                     resDiv.classList.add(...cls)
 
-                    if (resp ==='Não respondido'){
+                    if (resp=='Não respondido'){
                         resDiv.innerHTML += ' - Não respondido'
                         resDiv.classList.add('bg-danger')
                     }else{
                         const answer = resp['respondido']
                         const correto = resp['resp_correta']
 
-                        if(answer === correto){
+                        if(answer==correto){
                             resDiv.classList.add('bg-success')
                             resDiv.innerHTML += ` ** Respondido: ${answer}`
                         }else{
