@@ -35,7 +35,7 @@ const activateTimer = (time) =>{
             displaySeconds = seconds
         }
 
-        if(minutes == 0 && seconds == 0){
+        if(minutes === 0 && seconds === 0){
             timerBox.innerHTML = "<b>00:00</b>"
             setTimeout(()=>{
                 clearInterval(timer)
@@ -123,7 +123,7 @@ const sendData = () =>{
 
                         if(answer==correto){
                             resDiv.classList.add('bg-success')
-                            resDiv.innerHTML += ` ** Respondido **: ${answer}`
+                            resDiv.innerHTML += ` ** Respondido: ${answer}`
                         }else{
                             resDiv.classList.add('bg-danger')
                             resDiv.innerHTML += ` | Resposta correta: ${correto}`

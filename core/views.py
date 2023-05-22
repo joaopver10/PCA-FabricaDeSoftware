@@ -230,8 +230,6 @@ def portal(request):
 
 
 
-
-
         if totalPts:
             totalPtsFormatado = round(totalPts, 2)
 
