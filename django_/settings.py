@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'django_.urls'
@@ -89,23 +90,15 @@ DATABASES = {
     }
 }
 '''
-
-
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600)
+    'default': dj_database_url.config(
+        default='postgresql://postgres:WcQQfpgJiKEyFfXlnuRaLAOZroIsRVQh@viaduct.proxy.rlwy.net:51491/railway',
+        conn_max_age=600,
+        ssl_require= DEBUG
+    )
 }
 
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'educacional',
-        'USER': 'root',
-        'PASSWORD': '1234',
-    }
-}
-'''
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -142,6 +135,7 @@ USE_TZ = False
 
 STATIC_URL = 'static/'
 STATIC_ROOT = (BASE_DIR / 'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
