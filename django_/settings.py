@@ -92,7 +92,7 @@ DATABASES = {
 '''
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:WcQQfpgJiKEyFfXlnuRaLAOZroIsRVQh@viaduct.proxy.rlwy.net:51491/railway',
+        default='postgresql://postgres:OYpbmsfLJjQtYhnuRheblcxlKPZeNcQQ@viaduct.proxy.rlwy.net:33475/railway',
         conn_max_age=600,
         ssl_require= DEBUG
     )
